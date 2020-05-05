@@ -34,6 +34,30 @@ router.get('/profile/:userName', async (ctx, next) => {
 router.post('/login', async ( ctx, next ) => {
   const { userName, password } = ctx.request.body
 
+  let userInfo = null
+  if(userName == 'dudaxia' && password == '123456') {
+    userInfo = {
+      userId: 1,
+      userName: 'dudaxia',
+      nickName: '杜大侠',
+      gender: '男',
+    }
+  }
+
+  // 加密userInfo
+  // let token = null
+  // if( userInfo ) {
+  //   token = jwt.sign(userInfo, SECRET, { expiresIn: '1h' })
+  // }
+
+  if(userInfo == null ) {
+    ctx.body = {
+      errorCode: -1,
+      errorMessage: '登陆失败'
+    }
+    return
+  }
+
   // 返回值
   // ctx.body = {
   //   userName,
@@ -41,9 +65,25 @@ router.post('/login', async ( ctx, next ) => {
   // }
   ctx.body = {
     errorCode: 0,
+    data: userInfo,
     errorMessage: '登陆成功'
   }
   console.log('login:',userName,password)
 })
+
+// router.get('/getUserInfo', async ( ctx, next ) => {
+//   const token = ctx.header.Authorization
+//   try {
+//     const payload = await verify(token.split(' ')[1], SECRET)
+//     ctx.body = {
+//       errorCode: 0,
+//       data: payload,
+//       errorMessage: '成功'
+//     }
+//   } catch(e){
+
+//   }
+//   console.log('login:',userName,password)
+// })
 
 module.exports = router

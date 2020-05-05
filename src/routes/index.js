@@ -5,9 +5,9 @@ router.get('/', async (ctx, next) => {
     title: 'Hello Koa 2!',
     isMe: true,
     list : [
-      {name:"111"},
-      {name:"222"},
-      {name:"333"},
+      {name:'111'},
+      {name:'222'},
+      {name:'333'},
     ]
   })
 })
@@ -41,9 +41,9 @@ router.post('/login', async ( ctx, next ) => {
   // }
   ctx.body = {
     errorCode: 0,
-    errorMessage: "登陆成功"
+    errorMessage: '登陆成功'
   }
-  console.log("login:",userName,password)
+  console.log('login:',userName,password)
 })
 
 module.exports = router

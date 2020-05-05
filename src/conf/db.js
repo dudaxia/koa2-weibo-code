@@ -1,13 +1,13 @@
 
-const { isProd } = require("../utils/env")
+const { isProd } = require('../utils/env')
 
 // 本地环境mysql配置
 let MYSQL_CONFIG = {
   host: 'localhost',
   user: 'root',
-  password: 'ZBR5886771dzf!!',
+  password: 'ZBR5886771dzf!',
   port: '3306',
-  database: 'musql',
+  database: 'mysql',
 }
 
 if( isProd ) {
@@ -15,9 +15,9 @@ if( isProd ) {
   MYSQL_CONFIG = {
     host: 'localhost',
     user: 'root',
-    password: 'ZBR5886771dzf!!',
+    password: 'ZBR5886771dzf!',
     port: '3306',
-    database: 'musql',
+    database: 'mysql',
   }
 }
 

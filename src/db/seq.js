@@ -2,13 +2,13 @@
  * @description 实例化sequelize
  * @author dudaxia
  */
-const { isProd, isTest } = require("../utils/env")
+const { isProd, isTest } = require('../utils/env')
 
 const { MYSQL_CONFIG } = require('../conf/db') 
 
 const Sequelize = require('sequelize')
 
-const { host, user, password, database } = MYSQL_CONFIG;
+const { host, user, password, database } = MYSQL_CONFIG
 
 const conf = {
   host,
@@ -29,16 +29,16 @@ if( isProd ) {
   }
 }
 
-const seq = new Sequelize(database,user,password,conf);
+const seq = new Sequelize(database,user,password,conf)
 
 // 测试连接
 // seq.authenticate().then(()=>{
-//   console.log("success")
+//   console.log('success')
 // }).catch((e)=>{
-//   console.log("error",e)
+//   console.log('error',e)
 // })
 
-module.exports = seq;
+module.exports = seq
 
 
 

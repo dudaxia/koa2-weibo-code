@@ -28,6 +28,10 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
-    "nodemon": "^1.19.1"
-  }
+    "nodemon": "^1.19.1",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "eslint"
+  ]
 }

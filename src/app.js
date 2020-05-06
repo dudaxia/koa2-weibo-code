@@ -6,6 +6,10 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+const session = require('koa-generic-session')
+const redisStore = require('koa-redis')
+const { REDIS_CONF } = require('./conf/db')
+ 
 const { isProd } = require('./utils/env')
 
 // 路由
@@ -32,6 +36,22 @@ app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
+}))
+
+// session 配置
+app.keys = ['cjenHiV8625_+_&%234hsdjfhKJV']
+app.use(session({
+  key: 'weibo.sid', // cookie name 默认是 `koa.sid`
+  prefix: 'weibo:sess', // redis key 的前缀，默认是 `koa:sess`
+  cookie: {
+    path: '/', // 路径
+    httpOnly: true, // 只允许服务端修改
+    maxAge: 24 * 60 * 60 * 1000, // 过期时间 单位:ms
+  },
+  // ttl: 24 * 60 * 60 * 1000, // redis过期 不配则和maxAge相同
+  store: redisStore({ // 存储在redis
+    all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
+  })
 }))
 
 // logger

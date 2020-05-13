@@ -9,6 +9,7 @@ const {
 } = require('../services/user')
 
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
+const { doCrpyto } = require('../utils/crpy')
 
 const { 
   registerUserNameNotExistInfo,
@@ -49,6 +50,7 @@ async function register (userName, password, gender) {
   }
   // services 注册
   try {
+    password = doCrpyto(password)
     await createUser(userName, password, gender)
     return new SuccessModel()
   } catch(e) {

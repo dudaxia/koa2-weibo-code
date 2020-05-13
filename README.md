@@ -14,8 +14,10 @@
   ```
 
   * 启动 redis
-    `cd test/koa2-weibo-code`
-    `reids-server`
+    `cd /usr/local/redis-6.0.1 && reids-server`
   
   * 启动 项目
-  `npm run dev`
+    `npm run dev`
+
+  * sync 数据表（**慎用**）
+    `npm run sync`

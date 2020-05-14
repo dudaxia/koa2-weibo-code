@@ -13,10 +13,15 @@
       <%- include('widgets/blog-list',{
         blogList:[]
       }) %>  -->
+    <%- include('layout/header', { title: '微博 - 首页', isNav: true, list: true, isInputBlog: true })%>
+    
     <div class="index-page-wrapper">
         <div class="welcome">
           <span class="welcome-text">欢迎来到杜大侠个人网站</span>
         </div>
     </div>
+    
+    <%- include('layout/footer')%>
+
   </body>
 </html>

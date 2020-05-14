@@ -83,11 +83,21 @@ async function login(ctx, userName, password) {
   return new SuccessModel()
 }
 
+/**
+ * 退出登录
+ * @param {object} ctx 
+ */
+async function logout(ctx) {
+  ctx.session.userInfo = null
+  return new SuccessModel()
+}
+
 
 module.exports = {
   isExist,
   register,
-  login
+  login,
+  logout
 }
 
 

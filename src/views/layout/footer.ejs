@@ -1,5 +1,12 @@
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.0/js/bootstrap.min.js"></script>
     <script src="/javascripts/query-object.js"></script>
+    <script>
+        $('#logout').click(function(){
+            ajax.post('/api/user/logout', {}, function(err, data) {
+                location.href = '/login'
+            })
+        })
+    </script>
 </body>
 </html>

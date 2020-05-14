@@ -14,7 +14,8 @@ const { doCrpyto } = require('../utils/crpy')
 const { 
   registerUserNameNotExistInfo,
   registerUserNameExistInfo,
-  registerFailInfo
+  registerFailInfo,
+  loginFailInfo
 } = require('../model/ErrorInfo')
 
 /**
@@ -59,10 +60,34 @@ async function register (userName, password, gender) {
   }
 }
 
+/**
+ * 用户登录
+ * @param {string} ctx koa2 ctx
+ * @param {string} userName 
+ * @param {string} password 
+ */
+async function login(ctx, userName, password) {
+  // 登陆成功后 ctx.session.userInfo = xxx
+
+  // 获取用户信息
+  password = doCrpyto(password)
+  const userInfo = await getUserInfo(userName, password)
+  if(!userInfo) {
+    // 登录失败
+    return new ErrorModel(loginFailInfo)
+  }
+  // 登录成功
+  if(ctx.session.userInfo == null) {
+    ctx.session.userInfo = userInfo
+  }
+  return new SuccessModel()
+}
+
 
 module.exports = {
   isExist,
-  register
+  register,
+  login
 }
 
 

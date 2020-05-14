@@ -110,8 +110,8 @@ async function del(isAdmin, userName) {
   try {
     // 测试环境下，测试账号登录之后，删除自己
     if(isTest || isAdmin) {
-      await deleteUser(userName)
-      return new SuccessModel()
+      const result = await deleteUser(userName)
+      return result ? new SuccessModel() : new ErrorModel(deleteUserFailInfo)
     } else {
       return new ErrorModel(deleteUserFailInfo)
     }

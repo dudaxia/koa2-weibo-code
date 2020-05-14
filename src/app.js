@@ -15,7 +15,7 @@ const { SESSION_KEY } = require('./conf/secretKeys')
 
 // 路由
 const index = require('./routes/index')
-const users = require('./routes/users')
+const users = require('./routes/view/users')
 const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 

@@ -12,6 +12,7 @@
     "eslint": "eslint --ext .js ./src"
   },
   "dependencies": {
+    "ajv": "^6.12.2",
     "babel-eslint": "^10.1.0",
     "debug": "^4.1.1",
     "ejs": "~2.3.3",

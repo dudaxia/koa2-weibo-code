@@ -3,7 +3,7 @@
  * @author dudaxia
  */
 
-const { User } = require('../db/model/User')
+const User = require('../db/model/User')
 const { formatUser } = require('../services/_format')
 
 /**
@@ -51,9 +51,20 @@ async function createUser(userName, password, gender = 3, nickName) {
   return result.dataValues
 }
 
+
+async function deleteUser(userName) {
+  const result = await User.destroy({
+    where: {
+      userName
+    }
+  })
+  return result.dataValues
+}
+
 module.exports = {
   getUserInfo,
-  createUser
+  createUser,
+  deleteUser
 }
 
 

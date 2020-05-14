@@ -5,17 +5,20 @@
 
 const { 
   getUserInfo, 
-  createUser 
+  createUser,
+  deleteUser
 } = require('../services/user')
 
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { doCrpyto } = require('../utils/crpy')
+const { isDev, isTest } = require('../utils/env')
 
 const { 
   registerUserNameNotExistInfo,
   registerUserNameExistInfo,
   registerFailInfo,
-  loginFailInfo
+  loginFailInfo,
+  deleteUserFailInfo
 } = require('../model/ErrorInfo')
 
 /**
@@ -92,12 +95,38 @@ async function logout(ctx) {
   return new SuccessModel()
 }
 
+/**
+ * 删除用户
+ * @param {boolean} isAdmin 是否为炒鸡管理员
+ * @param {string} username 删除用户名
+ */
+async function del(isAdmin, userName) {
+  const userInfo = await getUserInfo(userName)
+  if(!userInfo) {
+    // 用户不存在，删除失败
+    return new ErrorModel(deleteUserFailInfo)
+  }
+
+  try {
+    // 测试环境下，测试账号登录之后，删除自己
+    if(isTest || isAdmin) {
+      await deleteUser(userName)
+      return new SuccessModel()
+    } else {
+      return new ErrorModel(deleteUserFailInfo)
+    }
+  }catch(e) {
+    console.error('user del failed -->',e)
+    return new ErrorModel(deleteUserFailInfo)
+  }
+}
 
 module.exports = {
   isExist,
   register,
   login,
-  logout
+  logout,
+  del
 }
 
 

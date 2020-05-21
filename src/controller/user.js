@@ -94,7 +94,7 @@ async function login(ctx, userName, password) {
  * @param {object} ctx 
  */
 async function logout(ctx) {
-  ctx.session.userInfo = null
+  delete ctx.session.userInfo
   return new SuccessModel()
 }
 

@@ -4,9 +4,11 @@
  */
 
 const path = require('path')
+const fs = require('fs')
 const { ErrorModel, SuccessModel } = require('../model/ResModel')
 const { uploadFileSizeFailInfo } = require('../model/ErrorInfo')
 const fse = require('fs-extra')
+const { uploadFileQiniu } = require('../utils/qiniu')
 
 // 存储目录
 const DIST_FOLDER_PATH = path.join(__dirname, '..', '..', 'uploadFiles')
@@ -38,11 +40,21 @@ async function saveFile({name, type, size, filePath}) {
   // 移动文件
   const fileName = Date.now() + '.' + name // 防止重名
   const disFilePath = path.join(DIST_FOLDER_PATH, fileName) // 上传文件夹 + fileName
+  
+  // 存储到本地文件夹
   await fse.move(filePath, disFilePath)
 
+  // 将本地文件上传到7牛云
+  let fileInfo = await uploadFileQiniu(disFilePath, name)
+
+  // 将本地文件删除
+  fs.unlink(disFilePath, res => {
+    console.log('本地文件删除成功')
+  })
+  
   // 返回信息
   return new SuccessModel({
-    url: '/' + fileName
+    url: fileInfo.url
   })
 }
 

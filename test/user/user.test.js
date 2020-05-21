@@ -50,7 +50,7 @@ test('json schema 检测，非法的格式，注册应该失败', async () => {
     .post('/api/user/register')
     .send({
       userName: 123, // 用户名为字符串
-      password: 'a', // 密码最小长度为3
+      password: 'aaaaaa', // 密码最小长度为3
       gender: 'mail', // 应该为数字
     })
   expect(res.body.errno).not.toBe(0)
@@ -70,6 +70,31 @@ test('json schema 检测，非法的格式，注册应该失败', async () => {
   COOKIE = res.headers['set-cookie'].join(';')
 })
 
+// 修改基本信息
+test('修改基本信息应该成功', async () => {
+  const res = await server
+    .post('/api/user/changeInfo')
+    .set('cookie', COOKIE)
+    .send({
+      nickName: '测试昵称', 
+      city: '测试昵称', 
+      picture: 'test.png', 
+    })
+  expect(res.body.errno).toBe(0)
+})
+
+// 修改密码
+test('修改密码应该成功', async () => {
+  const res = await server
+    .post('/api/user/changePassword')
+    .set('cookie', COOKIE)
+    .send({
+      password, 
+      newPassword: 'bbbbbb', 
+    })
+  expect(res.body.errno).toBe(0)
+})
+
 // 删除
 test('删除用户，应该成功', async () => {
   const res = await server
@@ -78,6 +103,15 @@ test('删除用户，应该成功', async () => {
     .send({
       userName, 
     })
+  expect(res.body.errno).toBe(0)
+})
+
+// 退出登录
+test('退出登录，应该成功', async () => {
+  const res = await server
+    .post('/api/user/logout')
+    .set('cookie', COOKIE)
+    
   expect(res.body.errno).toBe(0)
 })
 

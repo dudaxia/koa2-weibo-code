@@ -6,7 +6,8 @@
 const { 
   getUserInfo, 
   createUser,
-  deleteUser
+  deleteUser,
+  updateUser,
 } = require('../services/user')
 
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
@@ -18,7 +19,9 @@ const {
   registerUserNameExistInfo,
   registerFailInfo,
   loginFailInfo,
-  deleteUserFailInfo
+  deleteUserFailInfo,
+  changeInfoFailInfo,
+  changePasswordFailInfo,
 } = require('../model/ErrorInfo')
 
 /**
@@ -121,12 +124,67 @@ async function del(isAdmin, userName) {
   }
 }
 
+/**
+ * 修改用户个人信息
+ * @param {string} nickName 昵称
+ * @param {string} city 城市
+ * @param {string} picture 头像
+ */
+async function changeInfo(ctx, params) {
+  let { nickName, city, picture } = params
+
+  const { userName } = ctx.session.userInfo
+  nickName = nickName || userName
+
+  const result = await updateUser(
+    { 
+      newNickName: nickName, 
+      newCity: city, 
+      newPicture: picture 
+    }, 
+    { userName }
+  )
+
+  if(result) {
+    // 修改session
+    Object.assign(ctx.session.userInfo, { nickName, city, picture })
+    return new SuccessModel()
+  } else {
+    return new ErrorModel(changeInfoFailInfo)
+  }
+}
+
+/**
+ * 修改用户密码
+ * @param {*} password 原密码 
+ * @param {*} newPassword 新密码 
+ */
+async function changePsw(params) {
+  let { password, newPassword, userName } = params
+
+  const result = await updateUser(
+    { 
+      newPassword: doCrpyto(newPassword), 
+    }, 
+    { 
+      userName,
+      password: doCrpyto(password)
+    }
+  )
+  if(result) {
+    return new SuccessModel()
+  }
+  return new ErrorModel(changePasswordFailInfo)
+}
+
 module.exports = {
   isExist,
   register,
   login,
   logout,
-  del
+  del,
+  changeInfo,
+  changePsw,
 }
 
 

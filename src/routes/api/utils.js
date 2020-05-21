@@ -6,7 +6,7 @@
 const router = require('koa-router')() 
 const { loginCheck } = require('../../middlewares/loginChecks')
 const koaForm = require('formidable-upload-koa')
-const { saveFile } = require('../../controller/utils')
+const { saveFile, qiniuaToken } = require('../../controller/utils')
 
 router.prefix('/api/utils')
 
@@ -21,6 +21,11 @@ router.post('/upload', loginCheck, koaForm(), async (ctx, next) => {
     size,
     filePath: path
   })
+})
+
+// 获取7牛token
+router.post('/qiniutoken', loginCheck, async (ctx, next) => {
+  ctx.body = qiniuaToken()
 })
 
 

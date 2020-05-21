@@ -5,16 +5,23 @@
  */
 
 const qiniu = require('qiniu')
-const { ACCESS_KEY, SECRET_KEY, BUCKET, EXPIRES, BUCKET_DOMAIN, IS_PRIVATE } = require('../conf/qiniu')
+const { 
+  ACCESS_KEY, 
+  SECRET_KEY, 
+  BUCKET, 
+  EXPIRES, 
+  BUCKET_DOMAIN, 
+  IS_PRIVATE 
+} = require('../conf/qiniu')
 
 /**
  * 生成上传凭证token
- * @param {string} fileName 
+ * @param {string} fileName 保存的文件名
  */
 function generationToken(fileName) {
   let mac = new qiniu.auth.digest.Mac(ACCESS_KEY, SECRET_KEY)
   let options = {
-    scope: `${BUCKET}:${fileName}`,
+    scope: fileName ? `${BUCKET}:${fileName}` : BUCKET,
     expires: EXPIRES,
     returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
   }

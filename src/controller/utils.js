@@ -8,7 +8,7 @@ const fs = require('fs')
 const { ErrorModel, SuccessModel } = require('../model/ResModel')
 const { uploadFileSizeFailInfo } = require('../model/ErrorInfo')
 const fse = require('fs-extra')
-const { uploadFileQiniu } = require('../utils/qiniu')
+const { uploadFileQiniu, generationToken } = require('../utils/qiniu')
 
 // 存储目录
 const DIST_FOLDER_PATH = path.join(__dirname, '..', '..', 'uploadFiles')
@@ -58,6 +58,15 @@ async function saveFile({name, type, size, filePath}) {
   })
 }
 
+// 获取7云token
+function qiniuaToken() {
+  let token = generationToken()
+  return new SuccessModel({
+    token
+  })
+}
+
 module.exports = {
-  saveFile
+  saveFile,
+  qiniuaToken
 }

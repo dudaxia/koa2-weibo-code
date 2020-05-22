@@ -19,6 +19,8 @@ const { SESSION_KEY } = require('./conf/secretKeys')
 const index = require('./routes/index')
 const users = require('./routes/view/users')
 const userAPIRouter = require('./routes/api/user')
+const blogsViewRouter = require('./routes/view/blog')
+const blogsHomeApiRouter = require('./routes/api/blog-home')
 const utilsAPIRouter = require('./routes/api/utils')
 const errorViewRouter = require('./routes/view/error')
 
@@ -73,8 +75,9 @@ app.use(index.routes(), index.allowedMethods())
 
 app.use(users.routes(), users.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
+app.use(blogsViewRouter.routes(), blogsViewRouter.allowedMethods())
+app.use(blogsHomeApiRouter.routes(), blogsHomeApiRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
-
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 
 // error-handling

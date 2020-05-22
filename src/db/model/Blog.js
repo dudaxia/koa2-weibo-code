@@ -11,7 +11,6 @@ const Blog = seq.define('blog', {
   userId: {
     type: INTEGER,
     allowNull: false,
-    unique: true,
     comment: '用户ID'
   },
   content: {

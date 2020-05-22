@@ -20,12 +20,4 @@ router.get('/json', loginCheck, async (ctx, next) => {
   }
 })
 
-router.get('/profile/:userName', async (ctx, next) => {
-  const { userName } = ctx.params
-  ctx.body = {
-    title: 'koa2 profile',
-    userName
-  }
-})
-
 module.exports = router

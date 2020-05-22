@@ -13,12 +13,16 @@
     // 加载更多
     $btnLoadMore.click(function () {
         var nextPageIndex = PAGE_INDEX + 1
-        ajax.get(api + '/' + nextPageIndex, function(err, data) {
+        ajax.post('/api/blog/loadMore', {
+            userName: null, 
+            pageIndex: nextPageIndex, 
+            pageSize: PAGE_SIZE
+        }, function(err, data) {
             if (err) {
-                // 失败
                 alert(err)
                 return
             }
+            alert('加载成功')
             // 更新 pageIndex
             PAGE_INDEX = data.pageIndex
 
@@ -37,5 +41,29 @@
                 $containerWeiboList.append($(item))
             })
         })
+        // ajax.get(api + '/' + nextPageIndex, function(err, data) {
+        //     if (err) {
+        //         // 失败
+        //         alert(err)
+        //         return
+        //     }
+        //     // 更新 pageIndex
+        //     PAGE_INDEX = data.pageIndex
+
+        //     // 是否要隐藏“加载更多”
+        //     if ((PAGE_INDEX + 1) * PAGE_SIZE >= COUNT) {
+        //         $btnLoadMore.hide()
+        //     }
+
+        //     // 渲染页面
+        //     var $tempContainer = $(data.blogListTpl)
+        //     $tempContainer.each(function (index, item) {
+        //         if (item.nodeType !== 1) {
+        //             // 不是 DOM 元素，是其他（如 #TEXT 类型）
+        //             return
+        //         }
+        //         $containerWeiboList.append($(item))
+        //     })
+        // })
     })
 </script>

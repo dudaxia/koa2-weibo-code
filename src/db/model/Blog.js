@@ -1,0 +1,29 @@
+/**
+ * @description 博客数据模型
+ * @author dudaxia
+ */
+
+const seq = require('../seq')
+const { STRING, INTEGER, TEXT } = require('../types')
+
+// users
+const Blog = seq.define('blog', {
+  userId: {
+    type: INTEGER,
+    allowNull: false,
+    unique: true,
+    comment: '用户ID'
+  },
+  content: {
+    type: TEXT,
+    allowNull: false,
+    comment: '微博内容'
+  },
+  image: {
+    type: STRING,
+    allowNull: false,
+    comment: '图片地址'
+  },
+})
+
+module.exports = Blog

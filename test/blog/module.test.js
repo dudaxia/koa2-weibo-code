@@ -11,7 +11,6 @@ test('Blog 模型各个属性，符合预期', () => {
     userId: 1,
     content: 'contentcontent',
     image: 'test.png',
-   
   })
   // 验证各个属性
   expect(blog.userId).toBe(1)

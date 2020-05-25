@@ -10,5 +10,5 @@
  */
 
 module.exports = {
-  COOKIE: 'weibo.sid=TpdfRb8WBTy0_5SqdDUsI1w_Z7ruMkNi; weibo.sid.sig=XMf0KZ9s609T2Oyty2vPesiQyAQ'
+  COOKIE: 'weibo.sid=6xaOg3bAr4mjX4o82HrfqmRDFoxYw6yv; weibo.sid.sig=N_zjHh5opoxNuFKB-i8-PNt5vZA'
 }

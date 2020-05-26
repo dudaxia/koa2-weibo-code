@@ -8,9 +8,12 @@
 
 .weibo-list .item-wrapper .user-picture {
     width: 48px;
+    height: 48px;
+    object-fit: cover;
     position: absolute;
     top: 5px;
     left: 0;
+    border-radius: 6px;
 }
 
 .weibo-list .item-wrapper .content {
@@ -20,7 +23,10 @@
 .weibo-list .item-wrapper .content .blog-img {
     float: right;
     width: 100px;
+    max-height: 52px;
     margin-left: 10px;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
 .weibo-list .item-wrapper .info {

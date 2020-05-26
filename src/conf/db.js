@@ -11,7 +11,7 @@ let REDIS_CONF = {
 let MYSQL_CONFIG = {
   host: 'localhost',
   user: 'root',
-  password: 'ZBR5886771dzf!',
+  password: 'ZBR5886771dzf!!',
   port: '3306',
   database: 'mysql',
 }
@@ -21,7 +21,7 @@ if( isProd ) {
   MYSQL_CONFIG = {
     host: 'localhost',
     user: 'root',
-    password: 'ZBR5886771dzf!',
+    password: 'ZBR5886771dzf!!',
     port: '3306',
     database: 'mysql',
   }

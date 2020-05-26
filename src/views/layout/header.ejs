@@ -75,8 +75,16 @@
                 </a>
             </li>
         </ul>
+        <% if(!locals.hideLoginBtn) { %>
+            <ul class="navbar-nav" style="flex-direction: row;">
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">
+                        <i class="fa fa-gear"></i>
+                        <button  class="btn btn-primary" type="button" id="logout">退出登录</button>
+                    </a>
+                </li>
+            </ul>
+        <% } %>
     </nav>
     <% } %>
-    <% if(!locals.hideLoginBtn) { %>
-    <button  class="btn btn-primary" type="button" id="logout">退出登录</button>
-    <% } %>
+    

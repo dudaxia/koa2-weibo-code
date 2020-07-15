@@ -61,6 +61,18 @@ router.post('/changePassword', loginCheck, genValidator(userValidate),async (ctx
   ctx.body = await changePsw({ password, newPassword, userName })
 })
 
+// 测试接口
+router.post('/testApi',async (ctx, next) => {
+  
+  ctx.body = {
+    errcode: 0,
+    data: {
+      userName: 'dudaxia',
+      info: '不告诉你'
+    }
+  }
+})
+
 module.exports = router
 
 

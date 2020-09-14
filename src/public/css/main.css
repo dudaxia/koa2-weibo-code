@@ -51,3 +51,9 @@ textarea {
 .border-bottom {
     border-bottom: 1px solid #f1f1f1;
 }
+.copyright {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
